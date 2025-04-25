@@ -15,7 +15,7 @@ Whether you’re scanning Docker images or auditing dependencies, this dashboard
 ## 🧱 Project Structure
 
 Here's a quick look at the `src/` layout:
-
+```
 
 src
  ┣ app
@@ -73,7 +73,7 @@ src
  ┣ index.css
  ┣ main.tsx
  ┗ vite-env.d.ts
-
+```
 
 ---
 
