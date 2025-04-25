@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactECharts from 'echarts-for-react'
-import { useStatusSeverityMatrix } from '@/features/Dashboard/hooks'
+import { useStatusSeverityMatrix } from '@/features/dashboard/hooks'
 
 const SeverityStatusHeatmap = () => {
   const result = useStatusSeverityMatrix()
