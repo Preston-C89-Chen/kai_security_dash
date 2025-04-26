@@ -1,7 +1,8 @@
 import { useQuery } from '@tanstack/react-query'
 import { VulnerabilityRoot } from '@/features/vulnerabilities/types'
- const DATA_URL = import.meta.env.VITE_DATA_URL ?? '/data/ui_demo.json'
+const DATA_URL = import.meta.env.VITE_VULNERABILITIES_DATA_URL
 
+console.log("DATA_URL",DATA_URL)
 export const useVulnerabilityData = () => {
   return useQuery<VulnerabilityRoot[]>({
     queryKey: [],
