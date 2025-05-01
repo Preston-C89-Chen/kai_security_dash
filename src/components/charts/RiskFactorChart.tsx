@@ -20,32 +20,13 @@ const filterOptions = [
 
 const filterCollection = createListCollection({ items: filterOptions })
 
-const RiskFactorChart = () => {
-  const data = useAppSelector((state) => state.vulnerabilities.flattened)
+const RiskFactorChart = (props) => {
+  const { data } = props
   const [filter, setFilter] = useState('all')
-
-  const filteredData = useMemo(() => {
-    // If it's an array (unexpected), take the first item
-    const rawFilter = Array.isArray(filter) ? filter[0] : filter
-  
-    if (rawFilter === 'all') return data
-  
-    const [dimension, value] = rawFilter.split(':')
-    return data.filter((vuln) => {
-      if (dimension === 'severity') {
-        return vuln.severity?.toLowerCase() === value
-      }
-      if (dimension === 'status') {
-        return vuln.status?.toLowerCase().includes(value)
-      }
-      return true
-    })
-  }, [data, filter])
-
   const chartData = useMemo(() => {
     const factorCounts: Record<string, number> = {}
 
-    for (const vuln of filteredData) {
+    for (const vuln of data) {
       Object.keys(vuln.riskFactors || {}).forEach((key) => {
         factorCounts[key] = (factorCounts[key] || 0) + 1
       })
@@ -54,7 +35,7 @@ const RiskFactorChart = () => {
     return Object.entries(factorCounts)
       .sort((a, b) => b[1] - a[1])
       .map(([name, value]) => ({ name, value }))
-  }, [filteredData])
+  }, [data])
 
   const option = {
     title: {
@@ -90,41 +71,6 @@ const RiskFactorChart = () => {
 
   return (
     <Box>
-      <Flex justify="space-between" align="center" mb={4}>
-        <Heading as="h3" size="md">
-          Risk Factors by Frequency
-        </Heading>
-
-          <Select.Root
-            value={filter}
-            onValueChange={(e) => setFilter(e.value)} // e.value will be a string
-            size="sm"
-            width="250px"
-            collection={filterCollection}
-          >
-          <Select.HiddenSelect />
-          <Select.Control>
-            <Select.Trigger>
-              <Select.ValueText placeholder="Filter" />
-            </Select.Trigger>
-            <Select.IndicatorGroup>
-              <Select.Indicator />
-            </Select.IndicatorGroup>
-          </Select.Control>
-          <Portal>
-            <Select.Positioner>
-              <Select.Content>
-                {filterCollection.items.map((item) => (
-                  <Select.Item item={item} key={item.value}>
-                    {item.label}
-                    <Select.ItemIndicator />
-                  </Select.Item>
-                ))}
-              </Select.Content>
-            </Select.Positioner>
-          </Portal>
-        </Select.Root>
-      </Flex>
 
       <ReactECharts option={option} style={{ height: 400 }} />
     </Box>

@@ -84,8 +84,7 @@ export const useKaiStatusChartData = () => {
 }
 
 export const useStatusSeverityMatrix = () => {
-  const flattened = useAppSelector((state: RootState) => state.vulnerabilities.flattened)
-
+  const flattened = useAppSelector((state) => state.vulnerabilities.flattened)
   return useMemo(() => {
     if (!flattened.length) return null
 
@@ -135,7 +134,7 @@ export const useRiskFactorFrequency = (data: FlattenedVulnerability)  => {
   }, [data])
 }
 
-export const useVulnerabilityTrend = (data: FlattenedVulnerability) => {
+export const useVulnerabilityTrend = (data: FlattenedVulnerability[]) => {
   return useMemo(() => {
     if (!data || data.length === 0) return []
 

@@ -22,7 +22,7 @@ const columns: ColumnDef<FlattenedVulnerability>[] = [
 describe('Tanstack table filtering',() => {
   it('filters by severity high', () => {
     const table = createTable<FlattenedVulnerability>({
-      data: sampleData,
+      data: flattenedData,
       columns,
       state: {
         columnFilters: [{ id: 'severity', value: 'high' }],

@@ -8,7 +8,8 @@
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "test": "npx jest"
+    "test": "npx jest",
+    "flatten:vulnerabilities": "ts-node-esm scripts/flattenVulnerabilities.js"
   },
   "dependencies": {
     "@chakra-ui/react": "^3.16.0",
@@ -37,6 +38,7 @@
   "devDependencies": {
     "@eslint/js": "^9.22.0",
     "@types/jest": "^29.5.14",
+    "@types/node": "^22.15.2",
     "@types/react": "^19.0.10",
     "@types/react-dom": "^19.0.4",
     "@vitejs/plugin-react": "^4.3.4",
@@ -49,7 +51,8 @@
     "postcss": "^8.5.3",
     "tailwindcss": "^4.1.4",
     "ts-jest": "^29.3.2",
-    "typescript": "~5.7.2",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.8.3",
     "typescript-eslint": "^8.26.1",
     "vite": "^6.3.1"
   }

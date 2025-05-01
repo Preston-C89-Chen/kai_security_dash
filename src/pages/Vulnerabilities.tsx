@@ -11,9 +11,19 @@ import { Link as RouterLink } from 'react-router-dom'
 import { useEffect } from 'react'
 import { VulnerabilityTable } from '@/features/vulnerabilities/components/VulnerabilityTable'
 import { useLoadVulnerabilities} from '@/features/vulnerabilities/hooks'
+import { useProgressiveLoadVulnerabilities } from '@/features/vulnerabilities/hooks'
+
 
 const Vulnerabilities = () => {
-  const { flattened, isLoading, isError } = useLoadVulnerabilities()
+  //const { flattened, isLoading, isError } = useLoadVulnerabilities()
+  const {
+    flattened,
+    isLoading,
+    isError,
+    fetchNextPage,
+    hasNextPage,
+    isFetchingNextPage,
+  } = useProgressiveLoadVulnerabilities()
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []); //
@@ -29,7 +39,7 @@ const Vulnerabilities = () => {
         </Box>
       ) :
         (
-          <VulnerabilityTable data={flattened} />
+          <VulnerabilityTable data={flattened} fetchNextPage={fetchNextPage} hasNextPage={hasNextPage} isFetchingNextPage={isFetchingNextPage} />
         )
       }
     </Box>
